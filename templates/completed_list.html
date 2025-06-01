@@ -1,0 +1,22 @@
+<!-- templates/completed_list.html -->
+{% extends 'base.html' %}{% block title %}Completed Work{% endblock %}
+{% block content %}
+<h2>Completed Work</h2>
+<a href="{{ url_for('create_completed') }}">Add Completed Work</a>
+<table border="1" cellpadding="5">
+<tr><th>Plan ID</th><th>Equipment</th><th>Completion Date</th><th>Actions</th></tr>
+{% for cw in completed_list %}
+<tr>
+    <td>{{ cw.maintenance_plan_id }}</td>
+    <td>{{ cw.maintenance_plan.equipment.name }}</td>
+    <td>{{ cw.completion_date }}</td>
+    <td>
+        <a href="{{ url_for('edit_completed', id=cw.id) }}">Edit</a>
+        <form action="{{ url_for('delete_completed', id=cw.id) }}" method="post" style="display:inline;">
+            <button type="submit">Delete</button>
+        </form>
+    </td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

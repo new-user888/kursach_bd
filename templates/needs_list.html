@@ -1,0 +1,23 @@
+<!-- templates/needs_list.html -->
+{% extends 'base.html' %}{% block title %}Needs{% endblock %}
+{% block content %}
+<h2>Needs</h2>
+<a href="{{ url_for('create_need') }}">Add New Need</a>
+<table border="1" cellpadding="5">
+<tr><th>Plan ID</th><th>Plan (Equipment)</th><th>Material</th><th>Quantity</th><th>Actions</th></tr>
+{% for n in needs %}
+<tr>
+    <td>{{ n.maintenance_plan_id }}</td>
+    <td>{{ n.maintenance_plan.equipment.name }}</td>
+    <td>{{ n.material_asset.material_name }}</td>
+    <td>{{ n.quantity }}</td>
+    <td>
+        <a href="{{ url_for('edit_need', id=n.id) }}">Edit</a>
+        <form action="{{ url_for('delete_need', id=n.id) }}" method="post" style="display:inline;">
+            <button type="submit">Delete</button>
+        </form>
+    </td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

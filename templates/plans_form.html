@@ -1,0 +1,23 @@
+<!-- templates/plans_form.html -->
+{% extends 'base.html' %}{% block title %}{{ 'Edit' if plan else 'Create' }} Maintenance Plan{% endblock %}
+{% block content %}
+<h2>{{ 'Edit' if plan else 'Create' }} Maintenance Plan</h2>
+<form method="post">
+    <label>Equipment:
+        <select name="equipment_id">
+            {% for e in equipments %}
+                <option value="{{ e.id }}" {% if plan and plan.equipment_id==e.id %}selected{% endif %}>{{ e.name }}</option>
+            {% endfor %}
+        </select>
+    </label><br>
+    <label>Event:
+        <select name="event_id">
+            {% for ev in events %}
+                <option value="{{ ev.id }}" {% if plan and plan.event_id==ev.id %}selected{% endif %}>{{ ev.name }}</option>
+            {% endfor %}
+        </select>
+    </label><br>
+    <label>Periodicity: <input type="text" name="periodicity" value="{{ plan.periodicity if plan else '' }}"></label><br>
+    <button type="submit">{{ 'Update' if plan else 'Create' }}</button>
+</form>
+{% endblock %}

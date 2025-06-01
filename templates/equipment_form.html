@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Equipment{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width: 600px;">
+  <div class="card-body">
+    <h2 class="card-title mb-4">Equipment</h2>
+    <form method="POST">
+      <div class="mb-3">
+        <label for="type" class="form-label">Type</label>
+        <input type="text" class="form-control" id="type" name="type" required>
+      </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+      <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" id="status" name="status" required>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="lastmaintenancedate" class="form-label">Last Maintenance Date</label>
+        <input type="date" class="form-control" id="lastmaintenancedate" name="lastmaintenancedate" required>
+      </div>
+      <div class="d-flex justify-content-between">
+        <a href="{{ url_for('list_equipment') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

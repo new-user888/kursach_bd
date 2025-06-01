@@ -1,0 +1,16 @@
+<!-- templates/completed_form.html -->
+{% extends 'base.html' %}{% block title %}{{ 'Edit' if completed else 'Create' }} Completed Work{% endblock %}
+{% block content %}
+<h2>{{ 'Edit' if completed else 'Create' }} Completed Work</h2>
+<form method="post">
+    <label>Maintenance Plan:
+        <select name="maintenanceplanid">
+            {% for p in plans %}
+                <option value="{{ p.id }}" {% if completed and completed.maintenanceplanid==p.id %}selected{% endif %}>{{ p.id }} ({{ p.equipment.name }})</option>
+            {% endfor %}
+        </select>
+    </label><br>
+    <label>Completion Date: <input type="date" name="completion_date" value="{{ completed.completion_date if completed else '' }}"></label><br>
+    <button type="submit">{{ 'Update' if completed else 'Create' }}</button>
+</form>
+{% endblock %}

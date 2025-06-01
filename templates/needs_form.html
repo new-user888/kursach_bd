@@ -1,0 +1,25 @@
+<!-- templates/needs_form.html -->
+{% extends 'base.html' %}{% block title %}{{ 'Edit' if need else 'Create' }} Need{% endblock %}
+{% block content %}
+<h2>{{ 'Edit' if need else 'Create' }} Need</h2>
+<form method="post">
+    <label>Maintenance Plan:
+        <select name="maintenance_plan_id">
+            {% for p in plans %}
+                <option value="{{ p.id }}" {% if need and need.maintenance_plan_id==p.id %}selected{% endif %}>
+                    {{ p.id }} ({{ p.equipment.name }} - {{ p.event.name }})
+                </option>
+            {% endfor %}
+        </select>
+    </label><br>
+    <label>Material:
+        <select name="material_asset_id">
+            {% for a in assets %}
+                <option value="{{ a.id }}" {% if need and need.material_asset_id==a.id %}selected{% endif %}>{{ a.material_name }}</option>
+            {% endfor %}
+        </select>
+    </label><br>
+    <label>Quantity: <input type="number" name="quantity" value="{{ need.quantity if need else '' }}"></label><br>
+    <button type="submit">{{ 'Update' if need else 'Create' }}</button>
+</form>
+{% endblock %}
